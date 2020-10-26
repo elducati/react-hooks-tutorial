@@ -9,18 +9,19 @@ const App = () => {
 
 // const [showHello, setShowHello] =  useState(true)  
 
-const [count, setCount] = useState(() => 
-JSON.parse(localStorage.getItem("count"))
+const [city, setCity] = useState(() => 
+JSON.parse(localStorage.getItem("city"))
 )
-const {data, loading} = useFetch('https://api.openweathermap.org/data/2.5/weather?q=london&appid=5a8a858b84b4224ffa4b4465d2a0924e')
+const {data, loading} = useFetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5a8a858b84b4224ffa4b4465d2a0924e`)
 useEffect(()=>{
-  localStorage.setItem("count",JSON.stringify(count))
-},[count])
+  localStorage.setItem("city",JSON.stringify(city))
+},[city])
   return (
     <div>
       <div>{!data ? 'loading...': JSON.stringify(data)}</div>
-      {/* <div>count: {count}</div> */}
-      {/* <button onClick = {()=>setCount(c => c + 1)}>increment</button> */}
+      <div>city: {city}</div>
+      {/* <input onClick = {()=>setCount(c => c + 1)}>increment</button>  */}
+      <input name="text" value = {values.name} onChange = {() => setCity(city)}/>
       <>
       {/* <button onClick={() => setShowHello(!showHello)}>Toggle</button>
       {showHello && <Hello />} */}
